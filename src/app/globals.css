@@ -1,0 +1,128 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --safe-top: env(safe-area-inset-top);
+  --safe-bottom: env(safe-area-inset-bottom);
+}
+
+body {
+  -webkit-tap-highlight-color: transparent;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+}
+
+.no-scroll {
+  overflow: hidden;
+}
+
+/* Animations */
+.slide-up {
+  animation: slideUp 0.3s ease-out;
+}
+@keyframes slideUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.fade-in {
+  animation: fadeIn 0.25s ease-out;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.bounce-in {
+  animation: bounceIn 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+@keyframes bounceIn {
+  from { transform: scale(0); }
+  to { transform: scale(1); }
+}
+
+.modal-enter {
+  animation: modalSlideUp 0.25s ease-out;
+}
+@keyframes modalSlideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+/* Card hover */
+.card {
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.card:active {
+  transform: scale(0.97);
+}
+
+/* Option radio styling */
+.opt-btn {
+  transition: all 0.15s;
+}
+.opt-btn:active {
+  transform: scale(0.98);
+}
+.opt-btn.selected {
+  border-color: #f97316 !important;
+  background: rgba(249, 115, 22, 0.08) !important;
+}
+:is(.dark .opt-btn.selected) {
+  background: rgba(249, 115, 22, 0.15) !important;
+}
+
+/* Level badges */
+.lvl-H { background: rgb(34 197 94 / 0.15); color: rgb(22 163 74); }
+.lvl-M { background: rgb(234 179 8 / 0.15); color: rgb(202 138 4); }
+.lvl-L { background: rgb(148 163 184 / 0.15); color: rgb(100 116 139); }
+:is(.dark .lvl-H) { color: rgb(74 222 128); }
+:is(.dark .lvl-M) { color: rgb(250 204 21); }
+:is(.dark .lvl-L) { color: rgb(148 163 184); }
+
+/* Progress bar */
+.progress-fill {
+  transition: width 0.3s ease;
+}
+
+/* Toast */
+.toast {
+  animation: toastIn 0.25s ease-out, toastOut 0.25s ease-in 1.75s forwards;
+}
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes toastOut {
+  to { opacity: 0; transform: translateY(12px); }
+}
+
+/* Paw print decoration */
+.paw-bg {
+  position: fixed;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.03;
+  font-size: 200px;
+}
+
+/* Emoji avatar */
+.emoji-avatar {
+  width: 100%;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  border-radius: 1rem;
+}
+
+.emoji-avatar-lg {
+  font-size: 6rem;
+  width: 200px;
+  height: 200px;
+  border-radius: 1.5rem;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
