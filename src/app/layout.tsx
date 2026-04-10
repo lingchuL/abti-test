@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import { Analytics } from '@vercel/analytics/react';
 import './globals.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { ToastProvider } from '@/components/Toast';
@@ -28,6 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <div className="paw-bg top-20 -left-10 rotate-[-20deg]">🐾</div>
             <div className="paw-bg bottom-20 -right-10 rotate-[15deg]">🐾</div>
             {children}
+            <Analytics />
           </ToastProvider>
         </ThemeProvider>
       </body>
