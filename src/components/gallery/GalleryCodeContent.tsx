@@ -3,10 +3,10 @@
 import Link from 'next/link';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { LangSwitcher } from '@/components/LangSwitcher';
-import { GalleryGrid } from '@/components/gallery/GalleryGrid';
+import { GalleryGrid } from './GalleryGrid';
 import { useLang } from '@/i18n';
 
-export default function GalleryPage() {
+export function GalleryCodeContent({ code }: { code: string }) {
   const { t } = useLang();
 
   return (
@@ -31,7 +31,7 @@ export default function GalleryPage() {
       </header>
 
       <main className="max-w-5xl mx-auto px-3 sm:px-4 py-6 pb-24">
-        <GalleryGrid />
+        <GalleryGrid initialModalCode={code} />
       </main>
 
       <footer className="max-w-5xl mx-auto px-4 py-8 border-t border-slate-200 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400">

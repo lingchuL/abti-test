@@ -6,9 +6,12 @@ import Link from 'next/link';
 import type { QuizResult } from '@/lib/scoring';
 import { ResultDisplay } from '@/components/result/ResultDisplay';
 import { ThemeToggleSmall } from '@/components/ThemeToggle';
+import { LangSwitcher } from '@/components/LangSwitcher';
+import { useLang } from '@/i18n';
 
 export default function ResultPage() {
   const router = useRouter();
+  const { t } = useLang();
   const [data, setData] = useState<QuizResult | null>(null);
 
   useEffect(() => {
@@ -30,12 +33,15 @@ export default function ResultPage() {
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
-            首页
+            {t.home}
           </Link>
-          <span className="text-sm font-bold text-orange-500">测试结果</span>
-          <Link href="/quiz" className="text-sm text-orange-500 hover:text-orange-600 transition">
-            重新测试
-          </Link>
+          <span className="text-sm font-bold text-orange-500">{t.testResult}</span>
+          <div className="flex items-center gap-1">
+            <Link href="/quiz" className="text-sm text-orange-500 hover:text-orange-600 transition">
+              {t.retake}
+            </Link>
+            <LangSwitcher />
+          </div>
         </div>
       </header>
       <main className="max-w-2xl mx-auto px-4 py-6 pb-24">
