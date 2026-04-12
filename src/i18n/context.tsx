@@ -16,16 +16,34 @@ interface LangContextValue {
 
 const LangContext = createContext<LangContextValue | null>(null);
 
+function getCookie(name: string): string | null {
+  const m = document.cookie.match(new RegExp(`(?:^|; )${name}=([^;]*)`));
+  return m ? decodeURIComponent(m[1]) : null;
+}
+
 function detectLocale(): SupportedLocale {
   if (typeof window === 'undefined') return DEFAULT_LOCALE;
+
+  // 1. User's explicit choice
   const saved = localStorage.getItem('abti-lang');
   if (saved && SUPPORTED_LOCALES.some(l => l.code === saved)) {
     return saved as SupportedLocale;
   }
+
+  // 2. Geo-based detection (Vercel IP country → cookie set by middleware)
+  const geo = getCookie('abti-geo-locale');
+  if (geo && SUPPORTED_LOCALES.some(l => l.code === geo)) {
+    return geo as SupportedLocale;
+  }
+
+  // 3. Browser language
   const nav = navigator.language;
   if (nav.startsWith('pl')) return 'pl-PL';
   if (nav.startsWith('en')) return 'en-US';
-  return 'zh-CN';
+  if (nav.startsWith('zh')) return 'zh-CN';
+
+  // 4. Default for unknown languages
+  return 'en-US';
 }
 
 export function LangProvider({ children }: { children: ReactNode }) {
